@@ -1,0 +1,56 @@
+1. Create a simple command-line tool that allows us to send an API request and save the results in a text file!
+Your application should perform an API request to the dad joke API (https://icanhazdadjoke.com/api) to search for a joke based on the search phrase.
+GET: https://icanhazdadjoke.com/search?term=?
+ If it discovers jokes that match the phrase, it should output a random joke and save it to a file named jokes.txt. If it fails to discover a joke, it should log a message to the console inform
+Store the chat logs in the DB, either MongoDB or SQLite
+4. Create a cron job at the specified time in node.js to insert dummy data into DB.
+
+Kindly share the codes in a public git repository.
+
+
+1.
+const express = require('express')
+const app = express()
+app.post('/api/users/', (req, res)=>{
+   fetch(https://icanhazdadjoke.com/api:phrase)
+	.then(resp => resp.text())
+	.then(data => {
+		fs.writeFile('jokes.txt'. data, (err => if (err) throw err;
+			console.log('saved successfully');
+	}
+	.catch(error => console.log('inform'))
+	})
+
+2. fetch(https://icanhazdadjoke.com/api:phrase)
+	.then(resp => resp.text())
+	.then(data => {
+		fs.writeFile('jokes.txt'. data, (err => if (err) throw err;
+		console.log('saved successfully');
+	}
+	.catch(error => console.log('inform'))
+
+3.
+const mongoose=require('mongoose')
+const schema=mogoose.Schema({
+		userId1: mongoose.Schema.Types.ObjectId,
+		userId2: mongoose.Schema.Types.ObjectId,
+		sender: mongoose.Schema.Types.ObjectId,
+		message: String,
+	}, {timestamp: true})
+
+const Chat = mongoose.model('chats', schema)
+
+app.post('/api/user/save-chat', (req, res)=>{
+// assuming we get user info from jwt token
+	const user1 = req.user.sender
+	const user2 = req.user.receiver
+	const message = req.body.message
+	const sender = req.user.sender
+	const record = new Chat({
+		user1: user1,
+		user2: user2,
+		message: message,
+		sender: sender
+	})
+	Chat.save(record)
+})
